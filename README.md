@@ -14,7 +14,7 @@ $ npm install
 $ npm start
 ```
 
-And open http://localhost:3001/
+And open http://localhost:3000/
 
 Author
 ------
