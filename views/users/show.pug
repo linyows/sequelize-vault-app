@@ -1,0 +1,17 @@
+extends ../layout
+
+block content
+  dl
+    dt ID
+    dd= user.id
+    dt Username
+    dd= user.username
+    dt Email
+    dd= user.email
+      span (decrypted)
+    dt Encrypted Email
+    dd.small= user.email_encrypted
+    dt Created at
+    dd.small= user.created_at
+  div(class="user-list")
+    a(href="/users" class="list link-btn") back
