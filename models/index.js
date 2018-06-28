@@ -9,10 +9,11 @@ let conf = {};
 // sequelize-vault
 SequelizeVault.Vault.app = 'express';
 
-if (process.env.DB_USER && process.env.DB_PASS && process.env.VAULT_TOKEN) {
+if (process.env.DB_USER && process.env.DB_PASS) {
+  const token = fs.readFileSync('/root/.vault-token', 'utf-8').trim();
   SequelizeVault.Vault.enabled = true;
   SequelizeVault.Vault.convergented = true;
-  SequelizeVault.Vault.token = process.env.VAULT_TOKEN;
+  SequelizeVault.Vault.token = token;
   SequelizeVault.Vault.address = 'https://vault.service.consul:8200';
   conf = {
     database: 'express',
