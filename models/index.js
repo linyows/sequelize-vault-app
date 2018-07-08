@@ -1,6 +1,8 @@
 'use struct';
 
 require('dotenv').config()
+const fs = require('fs');
+const os = require('os');
 const Sequelize = require('sequelize');
 const SequelizeVault = require('sequelize-vault');
 
@@ -10,9 +12,11 @@ let conf = {};
 SequelizeVault.Vault.app = 'express';
 
 if (process.env.DB_USER && process.env.DB_PASS) {
+  const token = process.env.VAULT_TOKEN ?
+    process.env.VAULT_TOKEN : fs.readFileSync(os.homedir() + '/.vault-token', 'utf-8').trim();
   SequelizeVault.Vault.enabled = true;
   SequelizeVault.Vault.convergented = true;
-  SequelizeVault.Vault.token = process.env.VAULT_TOKEN;
+  SequelizeVault.Vault.token = token;
   SequelizeVault.Vault.address = process.env.VAULT_ADDR;
   conf = {
     database: 'express',
